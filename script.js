@@ -6,13 +6,7 @@ const state = {
 
 const $ = id => document.getElementById(id);
 
-
-// ==========================
-// ESCAPE HTML
-// ==========================
-
 function escapeHTML(text) {
-
   return String(text ?? "").replace(
     /[&<>"']/g,
     char => ({
@@ -23,20 +17,17 @@ function escapeHTML(text) {
       "'": "&#039;"
     })[char]
   );
-
 }
 
 
-// ==========================
-// RENDER
-// ==========================
+// ========================
+// HIỂN THỊ SCRIPT
+// ========================
 
 function render() {
 
   const query =
-    state.search
-      .trim()
-      .toLowerCase();
+    state.search.trim().toLowerCase();
 
   const filtered =
     state.scripts.filter(script => {
@@ -48,13 +39,11 @@ function render() {
       const text = `
         ${script.name}
         ${script.game}
-        ${script.description}
-        ${(script.tags || []).join(" ")}
+        ${script.source}
       `.toLowerCase();
 
       return matchesGame &&
         (!query || text.includes(query));
-
     });
 
 
@@ -65,7 +54,6 @@ function render() {
     new Set(
       state.scripts.map(s => s.game)
     ).size;
-
 
   $("status").textContent =
     `${filtered.length} script${
@@ -80,7 +68,6 @@ function render() {
         state.scripts.indexOf(script);
 
       return `
-
         <article class="card">
 
           <span class="game">
@@ -91,9 +78,10 @@ function render() {
             ${escapeHTML(script.name)}
           </h3>
 
-          <p>
-            ${escapeHTML(script.description)}
-          </p>
+          <div class="source">
+            <span>Nguồn:</span>
+            ${escapeHTML(script.source)}
+          </div>
 
           <div class="card-actions">
 
@@ -112,25 +100,21 @@ function render() {
           </div>
 
         </article>
-
       `;
 
     }).join("");
 
 
-  $("empty")
-    .classList
-    .toggle(
-      "hidden",
-      filtered.length !== 0
-    );
-
+  $("empty").classList.toggle(
+    "hidden",
+    filtered.length !== 0
+  );
 }
 
 
-// ==========================
-// GAMES
-// ==========================
+// ========================
+// DANH SÁCH GAME
+// ========================
 
 function loadGames() {
 
@@ -141,25 +125,21 @@ function loadGames() {
 
 
   $("gameFilter").innerHTML =
-
     `<option value="all">
       Tất cả game
     </option>` +
 
     games.map(game =>
-
       `<option value="${escapeHTML(game)}">
         ${escapeHTML(game)}
       </option>`
-
     ).join("");
-
 }
 
 
-// ==========================
-// COPY
-// ==========================
+// ========================
+// COPY SCRIPT
+// ========================
 
 async function copyText(text) {
 
@@ -181,23 +161,14 @@ async function copyText(text) {
     document.execCommand("copy");
 
     textarea.remove();
-
   }
 
 
-  $("toast")
-    .classList
-    .add("show");
-
+  $("toast").classList.add("show");
 
   setTimeout(() => {
-
-    $("toast")
-      .classList
-      .remove("show");
-
+    $("toast").classList.remove("show");
   }, 1800);
-
 }
 
 
@@ -210,9 +181,9 @@ window.copyScript = function(index) {
 };
 
 
-// ==========================
-// MODAL
-// ==========================
+// ========================
+// XEM SCRIPT
+// ========================
 
 window.openScript = function(index) {
 
@@ -227,47 +198,42 @@ window.openScript = function(index) {
     script.name;
 
   $("modalDescription").textContent =
-    script.description;
+    "Nguồn: " + script.source;
 
   $("modalCode").textContent =
     script.code;
 
 
-  $("modal")
-    .classList
-    .remove("hidden");
-
+  $("modal").classList.remove(
+    "hidden"
+  );
 
   document.body.style.overflow =
     "hidden";
-
 };
 
 
 function closeModal() {
 
-  $("modal")
-    .classList
-    .add("hidden");
+  $("modal").classList.add(
+    "hidden"
+  );
 
   document.body.style.overflow =
     "";
-
 }
 
 
-$("closeModal")
-  .addEventListener(
-    "click",
-    closeModal
-  );
+$("closeModal").addEventListener(
+  "click",
+  closeModal
+);
 
 
-$("modalBackdrop")
-  .addEventListener(
-    "click",
-    closeModal
-  );
+$("modalBackdrop").addEventListener(
+  "click",
+  closeModal
+);
 
 
 document.addEventListener(
@@ -282,75 +248,71 @@ document.addEventListener(
 );
 
 
-$("copyModal")
-  .addEventListener(
-    "click",
-    () => {
+$("copyModal").addEventListener(
+  "click",
+  () => {
 
-      copyText(
-        $("modalCode").textContent
-      );
+    copyText(
+      $("modalCode").textContent
+    );
 
-    }
-  );
-
-
-// ==========================
-// SEARCH
-// ==========================
-
-$("search")
-  .addEventListener(
-    "input",
-    event => {
-
-      state.search =
-        event.target.value;
-
-      render();
-
-    }
-  );
+  }
+);
 
 
-// ==========================
-// FILTER
-// ==========================
+// ========================
+// TÌM KIẾM
+// ========================
 
-$("gameFilter")
-  .addEventListener(
-    "change",
-    event => {
+$("search").addEventListener(
+  "input",
+  event => {
 
-      state.game =
-        event.target.value;
+    state.search =
+      event.target.value;
 
-      render();
+    render();
 
-    }
-  );
-
-
-// ==========================
-// THEME
-// ==========================
-
-$("themeBtn")
-  .addEventListener(
-    "click",
-    () => {
-
-      document.body.classList.toggle(
-        "light"
-      );
-
-    }
-  );
+  }
+);
 
 
-// ==========================
-// LOAD JSON
-// ==========================
+// ========================
+// LỌC GAME
+// ========================
+
+$("gameFilter").addEventListener(
+  "change",
+  event => {
+
+    state.game =
+      event.target.value;
+
+    render();
+
+  }
+);
+
+
+// ========================
+// DARK / LIGHT
+// ========================
+
+$("themeBtn").addEventListener(
+  "click",
+  () => {
+
+    document.body.classList.toggle(
+      "light"
+    );
+
+  }
+);
+
+
+// ========================
+// TẢI DATABASE
+// ========================
 
 async function loadScripts() {
 
@@ -396,9 +358,7 @@ async function loadScripts() {
 
     $("status").textContent =
       "⚠️ Không thể tải scripts.json";
-
   }
-
 }
 
 
