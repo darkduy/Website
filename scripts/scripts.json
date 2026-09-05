@@ -1,18 +1,9 @@
 [
   {
-    "name": "Example Script",
-    "game": "Your Game",
-    "version": "V1",
-    "description": "Script mẫu để bạn thay bằng script của mình.",
-    "tags": ["example"],
-    "code": "-- Paste your Luau script here\nprint(\"Hello Script Hub!\")"
-  },
-  {
-    "name": "Another Script",
-    "game": "Another Game",
-    "version": "V1",
-    "description": "Một script mẫu khác.",
-    "tags": ["demo"],
-    "code": "print(\"Hello Roblox!\")"
+    "name": "RUNAWAYS Auto Farm",
+    "game": "RUNAWAYS",
+    "source": "rawscripts.net",
+    "sourceUrl": "https://rawscripts.net/raw/RUNAWAYS-beta-AUTO-LOOT-KILL-ALL-AUTO-FARM-SILENT-AIM-225606",
+    "file": "scripts/runaways.lua"
   }
 ]
