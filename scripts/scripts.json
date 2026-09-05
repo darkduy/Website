@@ -1,0 +1,18 @@
+[
+  {
+    "name": "Example Script",
+    "game": "Your Game",
+    "version": "V1",
+    "description": "Script mẫu để bạn thay bằng script của mình.",
+    "tags": ["example"],
+    "code": "-- Paste your Luau script here\nprint(\"Hello Script Hub!\")"
+  },
+  {
+    "name": "Another Script",
+    "game": "Another Game",
+    "version": "V1",
+    "description": "Một script mẫu khác.",
+    "tags": ["demo"],
+    "code": "print(\"Hello Roblox!\")"
+  }
+]
