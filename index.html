@@ -1,148 +1,54 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Script Hub</title>
-  <meta name="description" content="Kho script Roblox">
-
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-
-<header>
-  <div class="nav">
-    <a href="#" class="logo">⚡ Script Hub</a>
-
-    <nav>
-      <a href="#scripts">Scripts</a>
-      <a href="#about">Giới thiệu</a>
-      <button id="themeBtn">☀️</button>
-    </nav>
-  </div>
-</header>
-
-<section class="hero">
-  <div class="hero-content">
-
-    <span class="badge">ROBLOX SCRIPT HUB</span>
-
-    <h1>
-      Kho script của bạn,
-      <span>gọn gàng & dễ dùng.</span>
-    </h1>
-
-    <p>
-      Tìm kiếm và sao chép script nhanh chóng.
-      Website chạy hoàn toàn trên GitHub Pages.
-    </p>
-
-    <a href="#scripts" class="primary-btn">
-      Xem Scripts ↓
-    </a>
-
-  </div>
-</section>
-
-<main id="scripts">
-
-  <div class="stats">
-
-    <div class="stat">
-      <strong id="scriptCount">0</strong>
-      <span>Scripts</span>
-    </div>
-
-    <div class="stat">
-      <strong id="gameCount">0</strong>
-      <span>Games</span>
-    </div>
-
-  </div>
-
-  <div class="toolbar">
-
-    <div class="search">
-      🔍
+  <header>
+    <h1>Script Hub</h1>
+    <p>Simple script library</p>
+  </header>
+  <main>
+    <div class="toolbar">
       <input
         id="search"
-        type="search"
-        placeholder="Tìm script hoặc game..."
+        type="text"
+        placeholder="Search scripts..."
       >
+      <select id="gameFilter">
+        <option value="all">All games</option>
+      </select>
     </div>
-
-    <select id="gameFilter">
-      <option value="all">Tất cả game</option>
-    </select>
-
-  </div>
-
-  <div id="status"></div>
-
-  <div id="scriptGrid" class="grid"></div>
-
-  <div id="empty" class="empty hidden">
-    <div>🔎</div>
-    <h2>Không tìm thấy script</h2>
-    <p>Thử tìm kiếm với từ khóa khác.</p>
-  </div>
-
-</main>
-
-<section id="about" class="about">
-
-  <h2>Về Script Hub</h2>
-
-  <p>
-    Đây là kho script cá nhân được xây dựng bằng HTML,
-    CSS và JavaScript. Bạn có thể thêm script bằng cách
-    chỉnh sửa file <code>scripts/scripts.json</code>.
-  </p>
-
-</section>
-
-<!-- SCRIPT MODAL -->
-
-<div id="modal" class="modal hidden">
-
-  <div id="modalBackdrop" class="backdrop"></div>
-
-  <div class="modal-box">
-
-    <div class="modal-header">
-
-      <div>
-        <small id="modalGame"></small>
-        <h2 id="modalTitle"></h2>
-      </div>
-
-      <button id="closeModal">×</button>
-
+    <p id="status">Loading...</p>
+    <div id="scriptGrid"></div>
+    <p id="empty" class="hidden">
+      No scripts found.
+    </p>
+  </main>
+  <!-- Script viewer -->
+  <div id="modal" class="hidden">
+    <div id="modalBackdrop"></div>
+    <div class="modal-box">
+      <button id="closeModal">
+        Close
+      </button>
+      <h2 id="modalTitle"></h2>
+      <p id="modalGame"></p>
+      <p id="modalDescription"></p>
+      <pre id="modalCode"></pre>
+      <button id="copyModal">
+        Copy Script
+      </button>
     </div>
-
-    <p id="modalDescription"></p>
-
-    <pre><code id="modalCode"></code></pre>
-
-    <button id="copyModal" class="primary-btn">
-      📋 Copy Script
-    </button>
-
   </div>
-
-</div>
-
-<div id="toast">
-  Đã copy script! 📋
-</div>
-
-<footer>
-  © <span id="year"></span> Script Hub
-</footer>
-
-<script src="script.js"></script>
-
+  <footer>
+    <p>
+      Script Hub © <span id="year"></span>
+    </p>
+  </footer>
+  <script src="script.js"></script>
 </body>
 </html>
